@@ -1,0 +1,210 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand: #1c77f5;
+  --brand-deep: #142855;
+  --accent: #f9a807;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-jakarta), 'Plus Jakarta Sans', system-ui, sans-serif;
+  background: #0a1224;
+  color: #e6edf7;
+  overflow-x: hidden;
+}
+
+/* ----- 3D perspective helpers ----- */
+.scene {
+  perspective: 1200px;
+}
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+.card-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s;
+  will-change: transform;
+}
+.card-3d:hover {
+  transform: translateY(-6px) rotateX(6deg) rotateY(-6deg);
+  box-shadow: 0 30px 60px -20px rgba(28, 119, 245, 0.45);
+}
+
+/* ----- glass ----- */
+.glass {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.glass-light {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(28, 119, 245, 0.12);
+}
+
+/* ----- gradient text ----- */
+.text-gradient {
+  background: linear-gradient(110deg, #59b6ff, #8ed1ff 30%, #ffd24d 70%, #ffbb2d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.text-gradient-brand {
+  background: linear-gradient(110deg, #8ed1ff, #3296ff 50%, #155fe2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ----- animated mesh background ----- */
+.mesh-bg {
+  background:
+    radial-gradient(circle at 15% 20%, rgba(28, 119, 245, 0.35), transparent 40%),
+    radial-gradient(circle at 85% 15%, rgba(249, 168, 7, 0.22), transparent 42%),
+    radial-gradient(circle at 70% 80%, rgba(21, 95, 226, 0.3), transparent 45%),
+    radial-gradient(circle at 30% 90%, rgba(142, 209, 255, 0.18), transparent 40%),
+    #0a1224;
+  background-size: 200% 200%;
+  animation: gradientMove 16s ease infinite;
+}
+
+/* ----- shimmer / skeleton ----- */
+.shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.04) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2.2s linear infinite;
+}
+
+/* ----- scrollbars ----- */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a1224;
+}
+::-webkit-scrollbar-thumb {
+  background: #19418f;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #1c77f5;
+}
+
+/* ----- reveal on scroll ----- */
+.reveal {
+  opacity: 0;
+  transform: translateY(34px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ----- 3D logo cube ----- */
+.cube {
+  position: relative;
+  transform-style: preserve-3d;
+  animation: spin3d 14s linear infinite;
+}
+.cube__face {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-weight: 800;
+}
+.cube__front  { transform: rotateY(0deg) translateZ(22px); }
+.cube__back   { transform: rotateY(180deg) translateZ(22px); }
+.cube__right  { transform: rotateY(90deg) translateZ(22px); }
+.cube__left   { transform: rotateY(-90deg) translateZ(22px); }
+.cube__top    { transform: rotateX(90deg) translateZ(22px); }
+.cube__bottom { transform: rotateX(-90deg) translateZ(22px); }
+
+/* ----- floating dots ----- */
+.dot {
+  position: absolute;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 30%, #8ed1ff, #155fe2);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+  animation: floaty 7s ease-in-out infinite;
+}
+
+/* ----- marquee ----- */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+/* ----- status pill ----- */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* hide number input arrows */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* shared form input */
+.form-input {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 0.9rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-input::placeholder {
+  color: #8590a8;
+}
+.form-input:focus {
+  outline: none;
+  border-color: #3296ff;
+  box-shadow: 0 0 0 3px rgba(50, 150, 255, 0.18);
+}
+.form-input:disabled {
+  opacity: 0.6;
+}
+/* light variant for dashboards */
+.form-input-light {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border-radius: 0.75rem;
+  background: #fff;
+  border: 1px solid #d5d9e2;
+  color: #22252f;
+  font-size: 0.9rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-input-light::placeholder { color: #8590a8; }
+.form-input-light:focus {
+  outline: none;
+  border-color: #1c77f5;
+  box-shadow: 0 0 0 3px rgba(28, 119, 245, 0.15);
+}
