@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { NextRequest } from 'next/server';
 import { getDb, COLLECTIONS } from '@/server/db';
 import { requireRole } from '@/server/auth';

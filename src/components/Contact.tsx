@@ -35,7 +35,7 @@ export function Contact() {
 
           <div className="mt-8 space-y-4">
             {[
-              { icon: Phone, label: 'Call / WhatsApp', value: '+91 9229570967', href: 'tel:+919229570967' },
+              { icon: Phone, label: 'Call / WhatsApp', value: '+91 9229570967n', href: 'tel:+919229570967' },
               { icon: Mail, label: 'Email', value: 'k47471508@gmail.com', href: 'mailto:k47471508@gmail.com' },
               { icon: Clock, label: 'Hours', value: 'Mon – Sun, 9:00 AM – 9:00 PM' },
             ].map((c) => (
