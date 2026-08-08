@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     title: 'ApplyMitra — Online Forms Cafe | All India Form Filling Experts',
     description:
       'ApplyMitra is an online forms cafe where experts fill every form for you — government schemes, exams, jobs, certificates and more across India.',
-    url: 'https://applymitra.com',
+    url: 'https://applymitra.onrender.com',
     siteName: 'ApplyMitra',
     type: 'website',
   },
