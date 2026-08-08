@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+   "paths":{
+      "@/*": ["./src/*"]
+    },
     "target": "ES2020",
     "lib": [
       "dom",
@@ -22,13 +25,7 @@
         "name": "next"
       }
     ],
-    "ignoreDeprecations": "6.0",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": [
-        "./src/*"
-      ]
-    }
+    
   },
   "include": [
     "next-env.d.ts",
