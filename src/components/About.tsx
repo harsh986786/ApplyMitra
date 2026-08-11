@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Target, Eye, Users2, Award, HeartHandshake } from 'lucide-react';
+import { Target, Eye, Users2, Award, HeartHandshake, ShieldCheck } from 'lucide-react';
 import { useReveal } from '@/lib/useReveal';
 
 export function About() {
@@ -24,10 +24,10 @@ export function About() {
 
           <div className="mt-8 grid grid-cols-2 gap-4">
             {[
-              { icon: Target, title: 'Our mission', text: 'Make every Indian form accessible to everyone.' },
-              { icon: Eye, title: 'Our vision', text: 'A nation where no one misses an opportunity because of paperwork.' },
-              { icon: Users2, title: 'Expert team', text: 'Trained staff who know every form inside out.' },
-              { icon: Award, title: 'Trusted service', text: 'Verified payments and transparent category-wise fees.' },
+              { icon: Target, title: 'Our mission', text: 'To make goverment,exam,job and college fprms simple and accessible for everyone.' },
+              { icon: Eye, title: 'Our vision', text: 'A future where no one misses an opportunity because of  complicated paperwork.' },
+              { icon: Users2, title: 'Expert team', text: 'Trained professionals who knows every form inside out and guide you at every step.' },
+              { icon: ShieldCheck, title: 'Trusted service', text: 'Verified payments and transparent category-wise fees for complete peace of mind.' },
             ].map((v) => (
               <div key={v.title} className="glass rounded-xl p-4">
                 <v.icon className="text-brand-300" size={24} />
@@ -49,7 +49,7 @@ export function About() {
                 className="object-cover"
               />
             </div>
-            <div className="absolute -top-6 -right-6 w-24 h-24 rounded-2xl bg-gradient-to-br from-accent-400 to-accent-600 flex items-center justify-center shadow-2xl animate-floaty z-10">
+            <div className="absolute top-1/2 right-6 -translate-y-1/2 w-24 h-24 rounded-2xl bg-gradient-to-br from-accent-400 to-accent-600 flex items-center justify-center shadow-2xl animate-floaty z-10">
               <HeartHandshake className="text-white" size={40} />
             </div>
             <h3 className="font-bold text-xl text-white mt-4 px-3 pb-3">Why choose ApplyMitra?</h3>
@@ -58,7 +58,7 @@ export function About() {
                 'All India government, exam, job & certificate forms in one place',
                 'Experts handle every form — zero confusion for you',
                 'Documents & payment collected on WhatsApp — no office visits',
-                'Category-wise fees — fair pricing for General, OBC, SC, ST , EWS', 'PH',
+                'Category-wise fees — fair pricing for General,OBC, SC, ST , EWS,PH & Women',
                 'Payment verified by admin before submission',
                 'Dedicated staff assigned to your application',
               ].map((t) => (

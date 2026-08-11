@@ -7,7 +7,6 @@ import { HowItWorks, TrustMarquee } from '@/components/HowItWorks';
 import { ServicesGrid } from '@/components/ServicesGrid';
 import { About } from '@/components/About';
 import { Contact } from '@/components/Contact';
-import { JoinTeam } from '@/components/JoinTeam';
 import Testimonials from '@/components/testimonials';
 import { Footer } from '@/components/Footer';
 import { ApplyModal } from '@/components/ApplyModal';
@@ -31,7 +30,6 @@ export function LandingPage() {
         <ServicesGrid onApply={setSelected} />
         <About />
         <Testimonials />
-        <JoinTeam />
         <Contact />
         <Footer />
         <ApplyModal service={selected} onClose={() => setSelected(null)} />

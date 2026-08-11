@@ -36,7 +36,7 @@ export function Hero({ onApply }: HeroProps) {
       </div>
 
       <div className="absolute inset-0 opacity-[0.07] pointer-events-none"
-        style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '48px 48px' }} />
+        style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px), radial-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '48px 48px' }} />
 
       <div className="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center w-full">
         <div className="animate-riseUp">
