@@ -12,7 +12,7 @@ import { Footer } from '@/components/Footer';
 import { ApplyModal } from '@/components/ApplyModal';
 import { ToastProvider } from '@/lib/toast';
 import type { Service } from '@/types';
-
+import {FAQ} from "@/components/FAQ";
 export function LandingPage() {
   const [selected, setSelected] = useState<Service | null>(null);
 
@@ -30,6 +30,7 @@ export function LandingPage() {
         <ServicesGrid onApply={setSelected} />
         <About />
         <Testimonials />
+        <FAQ></FAQ>
         <Contact />
         <Footer />
         <ApplyModal service={selected} onClose={() => setSelected(null)} />

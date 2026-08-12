@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Loader2, Search, ArrowRight, ExternalLink } from 'lucide-react';
+import { Loader2, Search, ArrowRight, ExternalLink, ShieldCheck, Zap, Lock, Headphones } from 'lucide-react';
 import { api } from '@/lib/api';
 import type { Service } from '@/types';
 
@@ -85,6 +85,7 @@ export function ServicesGrid({ onApply }: ServicesGridProps) {
                   {cat.title}
                 </div>
 
+
                 {/* Column Links List */}
                 <div className="flex-1 divide-y divide-slate-800/60 overflow-y-auto max-h-[480px] custom-scrollbar">
                   {items.length === 0 ? (
@@ -122,6 +123,54 @@ export function ServicesGrid({ onApply }: ServicesGridProps) {
               </div>
             );
           })}
+        </div>
+        {/* Is Grid Block ke khatam hone ke baad paste karein */}
+
+        {/* 🌟 YAHAN PASTE KAREIN (Trust Badge Strip) 🌟 */}
+        <div className="mt-6 bg-slate-900/50 rounded-xl border border-slate-800/80 p-4 sm:p-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <div className="flex items-center gap-3.5">
+              <div className="p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/60 text-blue-400 shrink-0">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="text-xs font-bold text-slate-200">Trusted by 1,000+</h4>
+                <p className="text-[11px] text-slate-400">applicants</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3.5">
+              <div className="p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/60 text-blue-400 shrink-0">
+                <Zap className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="text-xs font-bold text-slate-200">Fast & easy</h4>
+                <p className="text-[11px] text-slate-400">process</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3.5">
+              <div className="p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/60 text-blue-400 shrink-0">
+                <Lock className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="text-xs font-bold text-slate-200">100% secure</h4>
+                <p className="text-[11px] text-slate-400">payments</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3.5">
+              <div className="p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/60 text-blue-400 shrink-0">
+                <Headphones className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="text-xs font-bold text-slate-200">Expert guidance</h4>
+                <p className="text-[11px] text-slate-400">at every step</p>
+              </div>
+            </div>
+
+          </div>
         </div>
 
       </div>

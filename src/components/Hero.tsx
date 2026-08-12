@@ -26,7 +26,7 @@ export function Hero({ onApply }: HeroProps) {
   }, []);
 
   return (
-    <section id="top" className="relative min-h-screen flex items-center mesh-bg overflow-hidden pt-28 pb-16">
+    <section id="top" className="relative min-h-screen flex items-center mesh-bg overflow-hidden pt-20 pb-10">
       <div ref={sceneRef} className="absolute inset-0 pointer-events-none">
         <span className="dot" style={{ width: 14, height: 14, top: '18%', left: '12%' }} />
         <span className="dot" style={{ width: 8, height: 8, top: '30%', left: '80%', animationDelay: '1s' }} />
@@ -40,7 +40,7 @@ export function Hero({ onApply }: HeroProps) {
 
       <div className="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center w-full">
         <div className="animate-riseUp">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs font-medium text-brand-200 mb-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs font-medium text-brand-200 mb-4">
             <Sparkles size={14} className="text-accent-400" /> 
 Trusted by 1,000+ applicants across India
           </div>
@@ -48,12 +48,12 @@ Trusted by 1,000+ applicants across India
             Get Any Government, Exam <span className="text-gradient">or College Form Filled Accurately by</span><br />
              Experts from Home!
           </h1>
-          <p className="mt-6 text-lg text-ink-300 max-w-xl leading-relaxed">
+          <p className="mt-4 text-lg text-ink-300 max-w-xl leading-relaxed">
             Government schemes, exams, jobs, certificates, pensions — our experts handle the paperwork end to end.
             You just share documents on WhatsApp. We do the rest.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="mt-5 flex flex-wrap items-center gap-3">
             <button
               onClick={onApply}
               className="group px-7 py-3.5 rounded-xl bg-gradient-to-r from-brand-500 to-brand-700 text-white font-semibold shadow-xl shadow-brand-700/40 hover:scale-[1.03] transition flex items-center gap-2"
@@ -65,7 +65,7 @@ Trusted by 1,000+ applicants across India
             </a>
           </div>
 
-          <div className="mt-10 grid grid-cols-3 gap-4 max-w-md">
+          <div className="mt-6 grid grid-cols-3 gap-4 max-w-md">
             {[
               { icon: ShieldCheck, label: 'Expert verified' },
               { icon: Zap, label: 'Fast turnaround' },
@@ -79,7 +79,7 @@ Trusted by 1,000+ applicants across India
           </div>
         </div>
 
-        <div className="relative flex items-center justify-center min-h-[420px] scene">
+        <div className="relative flex items-center justify-center min-h-[360px] scene">
           <div className="absolute w-72 h-72 rounded-full bg-brand-600/20 blur-3xl animate-pulseRing" />
           <div className="absolute w-96 h-96 rounded-full border border-brand-400/20 animate-spin3d" style={{ animationDuration: '40s' }} />
 
@@ -95,7 +95,7 @@ Trusted by 1,000+ applicants across India
             <OrbitCard icon="🧾" title="Approval Rate 99.2%" className="top-20 right-20" delay="1.6s" />
           </div>
 
-          <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 glass rounded-2xl px-5 py-3 flex items-center gap-3 animate-floaty" style={{ animationDelay: '1s' }}>
+          <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 glass rounded-2xl px-5 py-3 flex items-center gap-3 animate-floaty" style={{ animationDelay: '1s' }}>
             <CheckCircle2 className="text-success-500" size={20} />
             <span className="text-sm text-white font-medium">Convenience fee only <span className="text-accent-400 font-bold">₹100</span> per form</span>
           </div>
