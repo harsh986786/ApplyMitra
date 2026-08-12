@@ -26,7 +26,7 @@ export function Hero({ onApply }: HeroProps) {
   }, []);
 
   return (
-    <section id="top" className="relative min-h-screen flex items-center mesh-bg overflow-hidden pt-20 pb-10">
+    <section id="top" className="relative pt-24 pb-12 mesh-bg overflow-hidden">
       <div ref={sceneRef} className="absolute inset-0 pointer-events-none">
         <span className="dot" style={{ width: 14, height: 14, top: '18%', left: '12%' }} />
         <span className="dot" style={{ width: 8, height: 8, top: '30%', left: '80%', animationDelay: '1s' }} />
