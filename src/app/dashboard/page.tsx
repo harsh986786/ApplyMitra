@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import {
   LayoutDashboard, FileText, Users2, UserCog, IndianRupee, TrendingUp, Plus, Trash2,
   CheckCircle2, Loader2, LogOut, ShieldCheck, Send, X, Tag, BadgeIndianRupee, UserCheck, Clock,
+  Pencil,
 } from 'lucide-react';
 import { api } from '@/lib/api';
 import type { Stats, Service, Application, TeamApplication, Staff, CategoryFee } from '@/types';
@@ -135,7 +136,7 @@ function Overview({ stats, applications, team }: { stats: Stats; applications: A
     { label: 'Payment verified', value: stats.paymentVerifiedApps, icon: CheckCircle2, color: 'from-success-500 to-success-600', sub: 'applications' },
     { label: 'Team applications', value: stats.totalTeamApplications, icon: Users2, color: 'from-accent-500 to-accent-700', sub: `${stats.pendingTeamApplications} pending` },
   ];
-   const RATE_PER_FORM = 25;
+   const RATE_PER_FORM = 30;
 
   // 2. Real Employee Performance with Team Apps Lookup
   const employeePerformanceMap = (applications || []).reduce((acc: any, app: any) => {
@@ -223,6 +224,7 @@ function Overview({ stats, applications, team }: { stats: Stats; applications: A
 function ServicesPanel({ services, onChange }: { services: Service[]; onChange: () => void }) {
   const toast = useToast();
   const [adding, setAdding] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
   const [fees, setFees] = useState<CategoryFee[]>(
     CASTE_CATEGORIES.map((c) => ({ category: c, governmentFee: 0, convenienceFee: 100 }))
   );
@@ -252,6 +254,56 @@ function ServicesPanel({ services, onChange }: { services: Service[]; onChange: 
   const setFee = (cat: string, field: 'governmentFee' | 'convenienceFee', value: number) => {
     setFees((prev) => prev.map((f) => (f.category === cat ? { ...f, [field]: value } : f)));
   };
+  const handleAiAutoFill = async () => {
+  if (!form.name) {
+    alert('Pehle service ka naam toh likhein!');
+    return;
+  }
+  try {
+    const res = await fetch('/api/services', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: form.name, useAi: true }),
+    });
+    const result = await res.json();
+    
+    if (result.success && result.data) {
+      // Yahan AI ka data form me set ho raha hai, save nahi ho raha!
+      setForm(prev => ({
+        ...prev,
+        category: result.data.category || prev.category,
+        description: result.data.description || prev.description,
+        eligibility: result.data.eligibility || prev.eligibility,
+        documentsRequired: result.data.documentsRequired ? result.data.documentsRequired.join(', ') : prev.documentsRequired,
+      }));
+
+      // Agar aapke component me fees ki alag state (setFees) hai:
+      if (result.data.fees && typeof setFees === 'function') {
+        setFees(result.data.fees);
+      }
+      alert('AI data filled successfully! Please review and click "Add service" to save.');
+    } else {
+      alert('AI failed: ' + (result.error || 'Unknown error'));
+    }
+  } catch (err) {
+    console.error(err);
+    alert('Something went wrong');
+  }
+};
+const handleEdit = (s: any) => {
+  setEditingId(s._id);
+  setForm({
+    name: s.name,
+    category: s.category,
+    description: s.description || '',
+    eligibility: s.eligibility || '',
+    documentsRequired: Array.isArray(s.documentsRequired) 
+      ? s.documentsRequired.join(', ') 
+      : s.documentsRequired || '',
+  });
+  if (s.fees) setFees(s.fees);
+  setAdding(true);
+};
 
   return (
     <div>
@@ -267,8 +319,24 @@ function ServicesPanel({ services, onChange }: { services: Service[]; onChange: 
 
       {adding && (
         <form onSubmit={add} className="mt-5 bg-white rounded-2xl p-6 border border-ink-200 grid sm:grid-cols-2 gap-4">
-          <LField label="Service name *"><input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="form-input-light" placeholder="e.g. PAN Card Application" /></LField>
-          <LField label="Category *">
+<LField label="Service name *">
+  <div className="flex gap-2 items-center">
+    <input 
+      required 
+      value={form.name} 
+      onChange={e => setForm({ ...form, name: e.target.value })} 
+      className="form-input-light flex-1 border p-2 rounded" 
+      placeholder="e.g. UPSC CSE 2026"
+    />
+    <button
+      type="button"
+      onClick={handleAiAutoFill}
+      className="bg-purple-600 text-white px-3 py-2 rounded text-sm font-medium hover:bg-purple-700 whitespace-nowrap"
+    >
+      ✨ Auto-Fill with AI
+    </button>
+  </div>
+</LField>          <LField label="Category *">
             <select value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} className="form-input-light">
               {['General', 'Government Scheme', 'Exam', 'Job', 'Certificate', 'Pension', 'Other'].map((c) => <option key={c}>{c}</option>)}
             </select>
@@ -312,7 +380,24 @@ function ServicesPanel({ services, onChange }: { services: Service[]; onChange: 
             <div key={s._id} className="bg-white rounded-2xl p-5 border border-ink-200">
               <div className="flex items-start justify-between">
                 <span className="pill bg-brand-50 text-brand-700 border border-brand-200"><Tag size={12} /> {s.category}</span>
-                <button onClick={() => del(s._id)} className="text-ink-400 hover:text-danger-600 p-1"><Trash2 size={16} /></button>
+                <div className="flex items-center gap-1">
+  <button
+    type="button"
+    onClick={() => handleEdit(s)}
+    title="Edit Service"
+    className="p-1 text-ink-400 hover:text-brand-600 rounded transition-colors"
+  >
+    <Pencil size={18} />
+  </button>
+  <button
+    type="button"
+    onClick={() => del(s._id)}
+    title="Delete Service"
+    className="p-1 text-ink-400 hover:text-red-500 rounded transition-colors"
+  >
+    <Trash2 size={18} />
+  </button>
+</div>
               </div>
               <h3 className="mt-3 font-bold text-ink-900">{s.name}</h3>
               <p className="text-xs text-ink-500 mt-1 line-clamp-2">{s.description}</p>

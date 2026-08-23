@@ -2,7 +2,6 @@ import { NextRequest } from 'next/server';
 import { getDb, COLLECTIONS } from '@/server/db';
 import { requireRole } from '@/server/auth';
 import { json, errorResponse } from '@/server/utils';
-
 export async function GET(req: NextRequest) {
   try {
     requireRole(req, 'admin');

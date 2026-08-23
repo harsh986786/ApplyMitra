@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@dotenvx/dotenvx": "^2.19.2",
+    "@google/genai": "^2.17.1",
     "lucide-react": "^0.344.0",
     "mongodb": "^7.5.0",
     "next": "^14.2.15",

@@ -3,7 +3,7 @@ import { getDb, COLLECTIONS } from '@/server/db';
 import { json, errorResponse, readBody } from '@/server/utils';
 import { ObjectId } from 'mongodb';
 import type { CasteCategory } from '@/types';
-
+import { sendTelegramAlert } from '@/lib/telegram';
 export async function POST(req: NextRequest) {
   try {
     const db = await getDb();
@@ -36,7 +36,9 @@ export async function POST(req: NextRequest) {
       createdAt: new Date(),
       updatedAt: new Date(),
     };
-    const result = await db.collection(COLLECTIONS.APPLICATIONS).insertOne(doc);
+     const result = await db.collection(COLLECTIONS.APPLICATIONS).insertOne(doc);
+     const alertMsg = `<b>New Application Received</b>\n\nName: ${body.applicantName}\nService: ${service.name}\nPhone: ${body.phone}\nEmail: ${body.email}\nDate: ${new Date().toLocaleDateString()}\n\nPlease review and process the application.`;
+    await sendTelegramAlert(alertMsg);
     return json({ _id: result.insertedId, ...doc }, 201);
   } catch (err) {
     return errorResponse(err, 'Failed to submit application');
