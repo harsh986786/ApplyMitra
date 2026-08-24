@@ -31,7 +31,6 @@ export function ServicesGrid({ onApply }: ServicesGridProps) {
   const categories = [
     { title: 'Latest Forms / Jobs', key: 'Job', color: 'border-blue-500 text-blue-400 bg-blue-950/40' },
     { title: 'Exam Forms', key: 'Exam', color: 'border-emerald-500 text-emerald-400 bg-emerald-950/40' },
-    { title: 'Certificates & Cards', key: 'Certificate', color: 'border-amber-500 text-amber-400 bg-amber-950/40' },
     { title: 'General / Other Services', key: 'General', color: 'border-purple-500 text-purple-400 bg-purple-950/40' },
   ];
 
@@ -70,10 +69,22 @@ export function ServicesGrid({ onApply }: ServicesGridProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.map((cat) => {
             // Get items belonging to this category
-            const items = filteredServices.filter((s: any) => {
-              const itemCat = s.category || 'General';
-              return itemCat.toLowerCase() === cat.key.toLowerCase();
-            });
+           // Line 73-76 ko isse replace karein:
+const items = filteredServices.filter((s: any) => {
+  const itemCat = (s.category || 'General').toLowerCase();
+  const targetKey = cat.key.toLowerCase();
+  const targetTitle = cat.title.toLowerCase();
+
+  return (
+    itemCat === targetKey ||
+    itemCat === targetTitle ||
+    itemCat.includes(targetKey) ||
+    targetKey.includes(itemCat) ||
+    (targetKey.includes('job') && itemCat.includes('job')) ||
+    (targetKey.includes('exam') && itemCat.includes('exam')) ||
+    (targetKey.includes('cert') && (itemCat.includes('cert') || itemCat.includes('card')))
+  );
+});
 
             return (
               <div 
